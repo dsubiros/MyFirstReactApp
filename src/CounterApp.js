@@ -1,6 +1,7 @@
 // import logo from './logo.svg';
 import './App.css';
 import React from 'react';
+import axios from 'axios';
 
 function CounterApp() {
   return (
@@ -14,8 +15,7 @@ function CounterApp() {
 class Counter extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { seconds: 0, date: (new Date()).toLocaleTimeString() };
-    
+    this.state = { seconds: 0, date: (new Date()).toLocaleTimeString() };    
   }
 
   render() {
@@ -29,9 +29,10 @@ class Counter extends React.Component {
   
   // clearInterval = null;
 
-  componentDidMount() {
+  async componentDidMount() {
     console.log("Counter component was mounted!");
      this.interval = setInterval(() => this.updateDate(), 1000);
+     await axios.get('http://localhost:5000/blogs');
   }
 
   componentWillUnmount() {
